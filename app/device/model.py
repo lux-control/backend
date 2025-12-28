@@ -42,5 +42,5 @@ class Device:
         )
     
     def save(self, db):
-        sensor = db.sensor.insert_one(self.to_dict())
+        device = db.device.insert_one(self.to_dict())
         return self._id
