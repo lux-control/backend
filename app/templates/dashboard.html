@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../static/styles/dashboard.css"/>
      <script src="../static/js/manual_lux_control.js"></script> 
      <script src="../static/js/mode_control.js"></script> 
+     <script src="../static/js/min_max.js"></script> 
     <title>Dashboard</title>
 </head>
 <body>
@@ -78,7 +79,43 @@
                   </label>
                 </div>
             </div>
-            <div class="inner-container" id="min-max-container"></div>
+            <div class="inner-container" id="min-max-container">
+                <div class="min-max-grid">
+                    <div class="lux-slider-container">
+                        <div class="lux-slider-header">
+                            <span class="lux-label">Min brightness</span>
+                            <span class="lux-value"><span id="min-lux-value">100</span> lux</span>
+                        </div>
+                    
+                        <input
+                          type="range"
+                          id="min-lux-slider"
+                          class="lux-slider"
+                          min="0"
+                          max="1000"
+                          step="10"
+                          value="100"
+                        />
+                    </div>
+                
+                    <div class="lux-slider-container">
+                        <div class="lux-slider-header">
+                            <span class="lux-label">Max brightness</span>
+                            <span class="lux-value"><span id="max-lux-value">800</span> lux</span>
+                        </div>
+                
+                        <input
+                          type="range"
+                          id="max-lux-slider"
+                          class="lux-slider"
+                          min="0"
+                          max="1000"
+                          step="10"
+                          value="800"
+                        />
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </body>
