@@ -6,4 +6,4 @@ main_bp = Blueprint("main", __name__)
 @main_bp.route("/", methods=["GET"])
 @login_required
 def landing_page():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", lux=0)

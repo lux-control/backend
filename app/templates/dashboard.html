@@ -3,9 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/dashboard.css"/>
+     <script src="../static/js/manual_lux_control.js"></script> 
+     <script src="../static/js/mode_control.js"></script> 
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>HELLO FROM LUX-CONTROL</h1>   
+    <div class="container">
+        <section class="info-block"></section>
+        <section class="info-block">
+            <div class="inner-container" id="lux-container">
+                <p class="lux-text">Current Brightness: {{ lux }} lux</p>
+            </div>
+            <div class="inner-container" id="mode-selector-container">
+                <p class="section-title">Mode</p>
+                <div class="mode-switch" id="mode-switch">
+                  <input class="mode-input" type="radio" name="control_mode" id="mode-manual" value="manual" checked>
+                  <input class="mode-input" type="radio" name="control_mode" id="mode-auto" value="auto">
+                
+                  <div class="mode-track">
+                    <div class="mode-thumb"></div>
+                    
+                    <label class="mode-option" for="mode-manual">Manual</label>
+                    <label class="mode-option" for="mode-auto">Auto</label>
+                  </div>
+                </div>
+            </div>
+            <div class="inner-container" id="manual-lux-container">
+                <div class="lux-slider-container">
+                  <div class="lux-slider-header">
+                    <span class="lux-label">Target brightness</span>
+                    <span class="lux-value">
+                      <span id="lux-slider-value">400</span> lux
+                    </span>
+                  </div>
+              
+                  <input
+                    type="range"
+                    id="lux-slider"
+                    class="lux-slider"
+                    min="0"
+                    max="1000"
+                    step="10"
+                    value="400"
+                  />
+                </div>
+
+            </div>
+            <div class="inner-container" id="power-selector-container">
+                <p class="section-title">Lighting presets</p>
+                <div class="tile-grid" id="lux-presets">
+                  <input class="tile-input" type="radio" name="lux_preset" id="preset-reading" value="reading">
+                  <label class="tile" for="preset-reading">
+                    <span class="tile-title">Reading</span>
+                    <span class="tile-subtitle">~300–500 lux</span>
+                  </label>
+              
+                  <input class="tile-input" type="radio" name="lux_preset" id="preset-detailed" value="detailed_work">
+                  <label class="tile" for="preset-detailed">
+                    <span class="tile-title">Detailed work</span>
+                    <span class="tile-subtitle">~750–1000 lux</span>
+                  </label>
+              
+                  <input class="tile-input" type="radio" name="lux_preset" id="preset-relax" value="relax">
+                  <label class="tile" for="preset-relax">
+                    <span class="tile-title">Relax</span>
+                    <span class="tile-subtitle">~150–300 lux</span>
+                  </label>
+              
+                  <input class="tile-input" type="radio" name="lux_preset" id="preset-night" value="night">
+                  <label class="tile" for="preset-night">
+                    <span class="tile-title">Night</span>
+                    <span class="tile-subtitle">~5–30 lux</span>
+                  </label>
+                </div>
+            </div>
+            <div class="inner-container" id="min-max-container"></div>
+        </section>
+    </div>
 </body>
 </html>

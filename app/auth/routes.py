@@ -108,7 +108,7 @@ def register_local():
         device_id="testdeviceid", # TODO  change the hardcoded id 
         email=email,
         username=username,
-        password=password,  # let save() hash
+        password=password, 
     )
     user.save()
 
