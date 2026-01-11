@@ -1,8 +1,10 @@
 from functools import wraps
-from flask import Blueprint, url_for, session, redirect, render_template, request, abort
+from flask import Blueprint, url_for, session, redirect, render_template, request, abort, jsonify
 from google_auth_oauthlib.flow import Flow
 from google.oauth2 import id_token
 from google.auth.transport.requests import Request as GoogleRequest
+from pubnub.models.consumer.v3.channel import Channel
+from ..pubnub_admin import build_pubnub_admin
 from pathlib import Path
 from flask import flash
 from ..extensions import mongo
@@ -154,3 +156,66 @@ def callback():
     session["auth_provider"] = "google"
 
     return redirect(next_url)
+
+@auth_bp.route("/pubnub/token", methods=["GET"])
+@login_required
+def pubnub_token():
+    pubnub = build_pubnub_admin()
+    authorized_uuid = session["user_id"]
+    channels = [
+        Channel.id("iot.status").read(),
+        Channel.id("iot.control").write(),
+    ]
+
+    envelope = pubnub.grant_token() \
+        .channels(channels) \
+        .authorized_uuid(authorized_uuid) \
+        .ttl(60) \
+        .sync()
+
+    return jsonify({
+        "token": envelope.result.token,
+        "ttl_minutes": 60,
+        "authorized_uuid": authorized_uuid
+    })
+
+@auth_bp.route("/pubnub/device-token", methods=["GET"])
+def pubnub_device_token():
+    auth = request.headers.get("Authorization", "")
+    if not auth.startswith("Bearer "):
+        abort(401)
+
+    provided_key = auth[len("Bearer "):].strip()
+
+    expected_key = os.getenv("IOT_DEVICE_API_KEY")
+    device_uuid = os.getenv("IOT_DEVICE_UUID")
+
+    if not expected_key or not device_uuid:
+        abort(500, description="Missing IOT_DEVICE_API_KEY or IOT_DEVICE_UUID")
+
+    if provided_key != expected_key:
+        abort(403)
+
+    pubnub = build_pubnub_admin()
+
+    channels = [
+        Channel.id("iot.control").read(),
+        Channel.id("iot.status").write(),
+    ]
+
+    ttl_minutes = 60
+
+    envelope = (
+        pubnub.grant_token()
+        .channels(channels)
+        .authorized_uuid(device_uuid)
+        .ttl(ttl_minutes)
+        .sync()
+    )
+    print("DEVICE TOKEN ISSUED FOR UUID:", device_uuid, "channels: iot.control=read, iot.status=write")
+
+    return jsonify({
+        "token": envelope.result.token,
+        "ttl_minutes": ttl_minutes,
+        "authorized_uuid": device_uuid
+    })
