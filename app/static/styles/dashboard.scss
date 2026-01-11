@@ -6,7 +6,7 @@ body{
     padding: 0;
 }
 
-.container {
+.dashboard-container {
     width: 100vw;
     height: 100vh;
     background-color: $bg-dark;
@@ -24,6 +24,7 @@ body{
         rgba(106, 30, 85, 0.35),
         rgba(26, 26, 29, 0.35)
       );
+      overflow-y: scroll;
     
       backdrop-filter: blur(14px) saturate(120%);
       -webkit-backdrop-filter: blur(14px) saturate(120%);

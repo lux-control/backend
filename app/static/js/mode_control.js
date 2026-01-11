@@ -4,9 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   switchEl.addEventListener("change", async (e) => {
         const input = e.target;
         if (!input.classList.contains("mode-input")) return;
-        const mode = input.value; // "manual" or "auto"
+        const mode = input.value; 
+
+        message_payload["mode"] = mode
+        publishMessage(message_payload)
+
         console.log("Control mode:", mode);
-        // Example: disable manual tiles when auto is on
+       
         const manualBox = document.getElementById("manual-lux-container");
         const autoBox = document.getElementById("power-selector-container");
         if (manualBox) {

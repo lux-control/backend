@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles/dashboard.css"/>
-     <script src="../static/js/manual_lux_control.js"></script> 
-     <script src="../static/js/mode_control.js"></script> 
-     <script src="../static/js/min_max.js"></script> 
-    <title>Dashboard</title>
-</head>
-<body>
-    <div class="container">
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block styles %} 
+<link rel="stylesheet" href="../static/styles/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
         <section class="info-block"></section>
         <section class="info-block">
             <div class="inner-container" id="lux-container">
@@ -118,5 +115,12 @@
             </div>
         </section>
     </div>
-</body>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/pubnub_client.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/manual_lux_control.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/mode_control.js') }}"></script>
+{% endblock %}
 </html>
