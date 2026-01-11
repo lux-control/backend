@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!input.classList.contains("mode-input")) return;
         const mode = input.value; 
 
-        message_payload["mode"] = mode
-        publishMessage(message_payload)
+        message = {
+           "mode": mode 
+        }
+        publishMessage(message)
 
         console.log("Control mode:", mode);
        

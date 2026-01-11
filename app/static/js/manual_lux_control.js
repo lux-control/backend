@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   updateUI();
   slider.addEventListener("input", () => {
     updateUI();
-    message_payload["manual_lux"] = parseInt(slider.value)
-    publishMessage(message_payload)
-    console.log(message_payload["manual_lux"])
+    message = {
+      "manual_duty" : parseInt(slider.value)
+    }
+    publishMessage(message)
   });
 });

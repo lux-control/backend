@@ -41,8 +41,8 @@
                     id="lux-slider"
                     class="lux-slider"
                     min="0"
-                    max="1000"
-                    step="10"
+                    max="100"
+                    step="5"
                     value="400"
                   />
                 </div>
@@ -51,7 +51,7 @@
             <div class="inner-container" id="power-selector-container">
                 <p class="section-title">Lighting presets</p>
                 <div class="tile-grid" id="lux-presets">
-                  <input class="tile-input" type="radio" name="lux_preset" id="preset-reading" value="reading">
+                  <input class="tile-input" type="radio" name="lux_preset" id="preset-reading" value="reading" checked>
                   <label class="tile" for="preset-reading">
                     <span class="tile-title">Reading</span>
                     <span class="tile-subtitle">~300–500 lux</span>
@@ -119,8 +119,11 @@
 {% endblock %}
 
 {% block scripts %}
+  <script src="{{ url_for('static', filename='js/target_lux.js') }}"></script>
   <script src="{{ url_for('static', filename='js/pubnub_client.js') }}"></script>
   <script src="{{ url_for('static', filename='js/manual_lux_control.js') }}"></script>
   <script src="{{ url_for('static', filename='js/mode_control.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/min_max.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/power_options.js') }}"></script>
 {% endblock %}
 </html>

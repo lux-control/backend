@@ -16,10 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
       minS.value = maxS.value;
     }
   };
+
   const refreshAll = () => {
     enforceMinMax();
     sliders.forEach(s => update(s.el, s.out));
   };
   refreshAll();
-  sliders.forEach(s => s.el.addEventListener("input", refreshAll));
+  sliders.forEach(s => s.el.addEventListener("input", () => {
+    refreshAll()
+    message = {
+      "min_lux" : parseInt(sliders[1].el.value),
+      "max_lux" : parseInt(sliders[2].el.value)
+    }
+    publishMessage(message)
+  }));
 });
