@@ -11,7 +11,7 @@
         <section class="info-block"></section>
         <section class="info-block">
             <div class="inner-container" id="lux-container">
-                <p class="lux-text">Current Brightness: {{ lux }} lux</p>
+                <p class="lux-text">Current Brightness: <span id="lux-indicator"></span> lux</p>
             </div>
             <div class="inner-container" id="mode-selector-container">
                 <p class="section-title">Mode</p>
@@ -30,9 +30,9 @@
             <div class="inner-container" id="manual-lux-container">
                 <div class="lux-slider-container">
                   <div class="lux-slider-header">
-                    <span class="lux-label">Target brightness</span>
+                    <span class="lux-label">Power:</span>
                     <span class="lux-value">
-                      <span id="lux-slider-value">400</span> lux
+                      <span id="lux-slider-value">400</span>%
                     </span>
                   </div>
               
