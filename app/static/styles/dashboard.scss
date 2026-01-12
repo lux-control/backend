@@ -10,9 +10,9 @@ body{
     width: 100vw;
     height: 100vh;
     background-color: $bg-dark;
-    padding: 2em;
+    padding: 1em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     box-sizing: border-box;
     gap: 2em;
 
@@ -24,7 +24,6 @@ body{
         rgba(106, 30, 85, 0.35),
         rgba(26, 26, 29, 0.35)
       );
-      overflow-y: scroll;
     
       backdrop-filter: blur(14px) saturate(120%);
       -webkit-backdrop-filter: blur(14px) saturate(120%);
